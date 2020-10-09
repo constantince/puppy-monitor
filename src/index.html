@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="btn1">js type error</button>
+
+    <button id="btn2">loading error</button>
+
+    <button id="btn3">console.lo('');</button>
+
+    <button id="btn4">Invalid array length</button>
+
+    <button id="btn5">456 is not a constructor</button>
+
+    <button id="btn6">decodeURI("%");</button>
+
+    <button id="btn7">123</button>
+
+    <button id="btn8">uppperCase</button>
+
+
+    <button id="btn9">脚本加载错误</button>
+    
+    <button id="btn10">样式加载错误</button>
+
+    <button id="btn11">Promise</button>
+
+    <button id="btn12">Dom Error</button>
+    
+
+    <img id="error-img">
+</body>
+
+<script>
+
+document.getElementById('btn1').addEventListener('click', () => {
+    if(window.a.b) {
+        console.log(true);
+    }
+}, false);
+
+document.getElementById('btn2').addEventListener('click', () => {
+    document.getElementById('error-img').src = "https://dfgdggdgdg.png"
+}, false);
+
+document.getElementById('btn3').addEventListener('click', () => {
+    console.lo('');
+}, false);
+
+document.getElementById('btn4').addEventListener('click', () => {
+            [].length = -5      // Uncaught RangeError: Invalid array length
+            // 3.2 Number对象的方法参数超出范围
+            var num = new Number(12.34)
+            console.log(num.toFixed(-1))   
+}, false);
+
+document.getElementById('btn5').addEventListener('click', () => {
+            // 4.1 调用不存在的方法
+            // 123()        // Uncaught TypeError: 123 is not a function
+            var p = new 456      // Uncaught TypeError: 456 is not a constructor
+}, false);
+
+document.getElementById('btn6').addEventListener('click', () => {
+    decodeURI("%");
+}, false);
+
+document.getElementById('btn7').addEventListener('click', () => {
+    123();
+}, false);
+
+document.getElementById('btn8').addEventListener('click',() => {
+    function toUppercase(string) {
+        if (typeof string !== "string") {
+            throw TypeError("Wrong type given, expected a string");
+        }
+        return string.toUpperCase();
+        }
+        toUppercase(4);
+});
+
+//脚本加载错误
+document.getElementById('btn9').addEventListener('click',() => {
+    
+    var js = document.createElement('script');
+    js.src = '188333';
+    document.body.appendChild(js)
+});
+
+
+//样式加载错误
+document.getElementById('btn10').addEventListener('click',() => {
+    
+    var css = document.createElement('link');
+    css.rel="stylesheet"
+    css.href="style.css"
+    document.head.appendChild(css)
+});
+
+//promise 错误
+document.getElementById('btn11').addEventListener('click',() => {
+    var p = new Promise((resole, reject) =>{
+        setTimeout(() => {
+            console.log(this.a.a.a);
+        },1000)
+    });
+
+    p.then(res => {
+        console.log(this.b.b);
+    })
+});
+
+document.getElementById('btn12').addEventListener('click',() => {
+    document.body.appendChild(document.cloneNode(true));
+});
+
+
+
+
+</script>
+<script src="../dist/puppy-monitor-my.min.js"></script>
+</html>
