@@ -2,7 +2,7 @@
 const Terser =  require('terser-webpack-plugin');
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const FileZiperAndUploader = require('file-ziper-and-uploader')
+const FileZiperAndUploader = require('file-ziper-and-uploader');
 
 
 
@@ -56,13 +56,17 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(),
-        new FileZiperAndUploader({
-            token: 'auth7yttx8nh0',
-            zipName: 'monitor.min.zip',
-            target: /\.min\.js$/,
-            folderName: 'monitor'
-        })
+        new CleanWebpackPlugin()
+        // new FileZiperAndUploader([
+        //     {
+        //         url: 'http://localhost:8181/upload',
+        //         token: 'auth7yttx8nh0',
+        //         zipName: 'puppy.zip',
+        //         target: 'all',
+        //         folderName: 'puppy'
+        //     }
+            
+        // ])
     ],
     devtool: isPro ? 'none' : 'source-map'
 }
