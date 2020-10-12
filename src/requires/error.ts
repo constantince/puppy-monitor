@@ -90,14 +90,14 @@ class ErrorMonitor extends Base {
             }
         }
 
-        this.sendMessage('error');
+        this.sendMessage();
     }
 
-    sendMessage = (type: string): void => {
+    sendMessage = (): void => {
         const urlParams = {
             ...this.bus, ...this.sys, ...this.base,
         };
-        this.fetch(this.errorServer + type, urlParams);
+        this.fetch(this.errorServer, urlParams);
     }
 
     // 性能日志处理 todo
