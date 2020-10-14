@@ -43,6 +43,7 @@ module.exports = {
       "grouping": 0,
       "allowCall": 0,
       "no-underscore-dangle":0,
+      "@typescript-eslint/no-namespace": 0,
       "import/extensions": [
         "error",
         "ignorePackages",

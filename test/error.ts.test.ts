@@ -1,6 +1,5 @@
+import assert from 'assert';
 import Errors from '../src/requires/error';
-
-const assert = require('assert');
 
 const err = new Errors();
 
