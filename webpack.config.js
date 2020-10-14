@@ -4,10 +4,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FileZiperAndUploader = require('file-ziper-and-uploader');
 
-
-
 const isPro = process.env.NODE_ENV === 'production';
-console.log(isPro);
 module.exports = {
     mode: 'none',//todo
     entry: {
@@ -56,17 +53,23 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin()
-        // new FileZiperAndUploader([
-        //     {
-        //         url: 'http://localhost:8181/upload',
-        //         token: 'auth7yttx8nh0',
-        //         zipName: 'puppy.zip',
-        //         target: 'all',
-        //         folderName: 'puppy'
-        //     }
-            
-        // ])
+        new CleanWebpackPlugin(),
+        /*
+        new FileZiperAndUploader([
+            {
+                url: 'http://localhost:8181/upload',
+                token: 'auth7yttx8nh0',
+                zipName: 'puppy-mini.zip',
+                target: /\.min\.js$/
+            },
+            {
+                url: 'http://localhost:8181/upload',
+                token: 'auth7yttx8nh0',
+                zipName: 'puppy.zip',
+                target: 'all'
+            }
+        ])
+        */
     ],
     devtool: isPro ? 'none' : 'source-map'
 }

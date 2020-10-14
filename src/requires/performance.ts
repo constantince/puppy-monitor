@@ -20,9 +20,11 @@ class Performance extends Base {
         getLCP(this.onReportHander, true);
         getTTFB(this.onReportHander);
         getFCP(this.onReportHander);
+
         window.addEventListener('load', () => {
             console.log(window.performance);
         }, true);
+
     }
 
     storeDataToSession = () => {
@@ -37,7 +39,7 @@ class Performance extends Base {
 
     bus: Puppies.Perf
 
-    onReportHander = (body):void => {
+    onReportHander = (body): void => {
         const data = Object.assign(body, this.base);
         console.log('body content is:', data);
         this.fetch(this.perfServer, JSON.stringify(data));

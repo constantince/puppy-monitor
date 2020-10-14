@@ -59,14 +59,14 @@ class ErrorMonitor extends Base {
 
             if (file) {
                 // https:\/\/regex101.com/r/h771ux/1 reg test
-                const templateStackInfo: string = file.match(/(?:at)(?:\s+[^\s]+)?\s+\(?((?:https?|file)[^\n)]+)\)?/)[1];
+                const templateStackInfo = file.match(/(?:at)(?:\s+[^\s]+)?\s+\(?((?:https?|file)[^\n)]+)\)?/)[1];
                 stacks = !templateStackInfo ? [] : templateStackInfo.split(/:(?=\d+:\d+$)/);
                 lc = (stacks[1] || lc).split(':');
             }
-            const ln: string | number = lc[0];
-            const cn: string | number = lc[1];
-            const msg: string = e.message;
-            const url: string = stacks[0];
+            const ln = lc[0];
+            const cn = lc[1];
+            const msg = e.message;
+            const url = stacks[0];
             const fy = 'JAVASCRIPT';
             this.bus = {
                 ln, cn, msg, url, fy,
@@ -75,11 +75,11 @@ class ErrorMonitor extends Base {
             const node: Element | any = e.target;
             if (e.target) {
                 if (node.className !== 'syt.error.img') {
-                    const ln: string | number = 0;
-                    const cn: string | number = 0;
+                    const ln = 0;
+                    const cn = 0;
                     const msg = 'static resource load error';
-                    const url: string = node.src || node.href;
-                    const fy: string = node.nodeName;
+                    const url = node.src || node.href;
+                    const fy = node.nodeName;
                     this.bus = {
                         msg, url, fy, ln, cn,
                     };
