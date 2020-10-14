@@ -72,21 +72,38 @@ class ErrorMonitor extends Base {
                 ln, cn, msg, url, fy,
             };
         } else if (e.type === 'error') { // Resource loading Error
-            const node: Element | any = e.target;
-            if (e.target) {
-                if (node.className !== 'syt.error.img') {
-                    const ln = 0;
-                    const cn = 0;
-                    const msg = 'static resource load error';
-                    const url = node.src || node.href;
-                    const fy = node.nodeName;
-                    this.bus = {
-                        msg, url, fy, ln, cn,
-                    };
-                } else {
-                    console.error('something goes wrongdd');
-                    return;
+            const node = <HTMLElement>e.target;
+            const fy = node.nodeName;
+            const ln = 0;
+            const cn = 0;
+            const msg = 'static resource load error';
+            let url: string;
+            if (node) {
+                switch (fy) {
+                case 'SCRIPT': {
+                    const script = <HTMLScriptElement>node;
+                    url = script.src;
+                    break;
                 }
+                case 'IMG':
+                    if (node.className !== 'syt.error.img') {
+                        const img = <HTMLImageElement>node;
+                        url = img.src;
+                    }
+                    break;
+
+                case 'LINK': {
+                    const css = <HTMLLinkElement>node;
+                    url = css.href;
+                    break;
+                }
+                default:
+
+                    break;
+                }
+                this.bus = {
+                    msg, url, fy, ln, cn,
+                };
             }
         }
 

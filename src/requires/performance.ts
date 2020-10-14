@@ -24,25 +24,24 @@ class Performance extends Base {
         window.addEventListener('load', () => {
             console.log(window.performance);
         }, true);
-
     }
 
-    storeDataToSession = () => {
+    storeDataToSession = ():string => {
         console.log('store-data-to-session');
         return '';
     }
 
-    storeDataToLocalDataBase = () => {
+    storeDataToLocalDataBase = ():string => {
         console.log('send-data-to-local-database');
         return '';
     }
 
     bus: Puppies.Perf
 
-    onReportHander = (body): void => {
-        const data = Object.assign(body, this.base);
-        console.log('body content is:', data);
-        this.fetch(this.perfServer, JSON.stringify(data));
+    onReportHander = (): void => {
+        // const data = Object.assign(body, this.base);
+        // console.log('body content is:', data);
+        // this.fetch(this.perfServer, JSON.stringify(data));
     }
 }
 
