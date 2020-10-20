@@ -44,6 +44,7 @@ module.exports = {
       "allowCall": 0,
       "no-underscore-dangle":0,
       "@typescript-eslint/no-namespace": 0,
+      "max-len": ["error", { "code": 150 }],
       "import/extensions": [
         "error",
         "ignorePackages",
