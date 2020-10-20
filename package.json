@@ -7,7 +7,8 @@
     "dev": "cross-env NODE_ENV=development webpack",
     "build": "cross-env NODE_ENV=production webpack",
     "test": "./node_modules/mocha/bin/mocha -r jsdom-global/register --require ts-node/register test/*.test.ts",
-    "fix": "eslint . --ext .ts --fix"
+    "fix": "eslint . --ext .ts --fix",
+    "watch": "webpack --watch"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +37,7 @@
     "eslint-plugin-react": "^7.21.1",
     "eslint-plugin-typescript": "^0.14.0",
     "file-ziper-and-uploader": "^1.3.5",
+    "find": "^0.3.0",
     "jsdom": "^16.4.0",
     "jsdom-global": "^3.0.2",
     "jszip": "^3.5.0",

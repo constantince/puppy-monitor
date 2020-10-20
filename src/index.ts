@@ -10,7 +10,7 @@ class PuppyMonitor {
 
     performance: Performance = new Performance();
 
-    // 心跳处理 发送数据的间隔频率  todo
+    // 心跳处理 发送数据的间隔频率 todo
     heartBeat = (): void => {
         console.log('ddd');
     }

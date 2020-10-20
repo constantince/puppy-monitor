@@ -54,22 +54,38 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        /*
+        
         new FileZiperAndUploader([
             {
                 url: 'http://localhost:8181/upload',
                 token: 'auth7yttx8nh0',
-                zipName: 'puppy-mini.zip',
+                zipName: 'puppy-js.zip',
                 target: /\.min\.js$/
             },
             {
                 url: 'http://localhost:8181/upload',
                 token: 'auth7yttx8nh0',
-                zipName: 'puppy.zip',
+                zipName: 'puppy-map.zip',
+                target: /\.js\.map$/
+            },
+            {
+                url: 'http://localhost:8181/upload',
+                token: 'auth7yttx8nh0',
+                zipName: 'all1.zip',
+                target: 'all'
+            },
+            {
+                url: 'http://localhost:8181/upload',
+                token: 'auth7yttx8nh0',
+                zipName: 'all2.zip',
                 target: 'all'
             }
         ])
-        */
     ],
-    devtool: isPro ? 'none' : 'source-map'
+    devtool: isPro ? 'none' : 'source-map',
+    watchOptions:{
+        poll:1000,//监测修改的时间(ms)
+        // aggregeateTimeout:500, //防止重复按键，500毫米内算按键一次
+        ignored:/node_modules/,//不监测
+    }
 }
