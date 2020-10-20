@@ -11,11 +11,6 @@ class ErrorMonitor extends Base {
         super();
         this.errorServer = `${this.serverUrl}error`;
         console.log('Main engine enaged... pong pong ~~ pong pong');
-        // 系统基础设备信息（os，app系统，cpu，网络环境）TODO
-        // this.base = {}; //框架环境基础信息（userId，车牌，车场）TODO
-        // this.bus = {}; //基础业务信息（报错，信息，http，自定义）
-        // this.identify = {}; //身份信息：（本次调用栈标识，用户标识，错误唯一标识）TODO
-        // this.errorUrlContext = []; //报错时上下文调用接口 TODO
         this.init();
     }
 

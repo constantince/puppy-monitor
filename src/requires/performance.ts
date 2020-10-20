@@ -18,24 +18,25 @@ class Performance extends Base {
 
     // initialize function to get metrics
     init(): void {
-        //开发发送性能报告，延迟执行，保证数据尽量准确
-        window.addEventListener('load', () => {
-            getCLS(this.onReportHander, true);
-            getFID(this.onReportHander);
-            getLCP(this.onReportHander, true);
-            getTTFB(this.onReportHander);
-            getFCP(this.onReportHander);
-            setTimeout(() => {
-                const data = this.calculater<globalThis.Performance>(window.performance.toJSON().timing);
-                this.onReportHander(data, this.perfServer);
-            }, 1000);
-            
-        }, true);
+        // 业务版本升级，才需要发送性能报告。否则频繁发送，毫无意义。
+        if (!this.compareVersion()) {
+            // 开始发送性能报告，延迟执行，保证数据尽量准确
+            window.addEventListener('load', () => {
+                getCLS(this.onReportHander, true);
+                getFID(this.onReportHander);
+                getLCP(this.onReportHander, true);
+                getTTFB(this.onReportHander);
+                getFCP(this.onReportHander);
+                setTimeout(() => {
+                    const data = this.calculater<globalThis.Performance>(window.performance.toJSON().timing);
+                    this.onReportHander(data, this.perfServer);
+                }, 1000);
+            }, true);
+        }
     }
 
     calculater = <T>(t: any): T => {
-        console.log(t);
-        let times:any = {};
+        const times:any = {};
         // 【重要】页面加载完成的时间
         // 【原因】这几乎代表了用户等待页面可用的时间
         times.loadPage = t.loadEventEnd - t.navigationStart;
@@ -89,7 +90,7 @@ class Performance extends Base {
         return '';
     }
 
-    bus: Puppies.Perf
+    bus: Puppies.Perf;
 
     onReportHander = (body, url: string = this.metricsServer): void => {
         const data = Object.assign(body, this.base);

@@ -53,6 +53,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "js-cookie": "^2.2.1",
     "ua-parser-js": "^0.7.22",
     "web-vitals": "^0.2.4"
   }

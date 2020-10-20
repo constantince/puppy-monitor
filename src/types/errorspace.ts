@@ -31,7 +31,8 @@ declare namespace ErrorMonitorSpace {
 
     export interface Client {
         traceId: string,
-        clientId: string
+        clientId: string,
+        version: string
     }
 }
 
