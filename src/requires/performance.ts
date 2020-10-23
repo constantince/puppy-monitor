@@ -1,15 +1,44 @@
 import {
-    getCLS, getFID, getLCP, getTTFB, getFCP,
+    getCLS, getFID, getLCP, getTTFB, getFCP
 } from 'web-vitals';
 import Puppies from '../types/errorspace';
 import Base from './base';
 
+const longtaskObserver: PerformanceObserver = new PerformanceObserver((list) => {
+    list.getEntries().forEach((item) => {
+        console.log('list entry:', item.toJSON());
+    });
+    // console.log('list entry:', list.getEntries());
+});
+
+const paintObserver: PerformanceObserver = new PerformanceObserver((list) => {
+    list.getEntries().forEach((item) => {
+        console.log('list entry:', item.toJSON());
+    });
+    // console.log('list entry:', list.getEntries());
+});
+
+const ttfbObserver: PerformanceObserver = new PerformanceObserver((list) => {
+    list.getEntries().forEach((item) => {
+        console.log('list entry:', item.toJSON());
+    });
+    // console.log('list entry:', list.getEntries());
+});
+
+longtaskObserver.observe({ entryTypes: ['longtask'] });
+paintObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+ttfbObserver.observe({ entryTypes: ['resource'] });
 class Performance extends Base {
     constructor() {
         super();
         this.metricsServer = `${this.serverUrl}metrics`;
         this.perfServer = `${this.serverUrl}perf`;
         this.init();
+        getCLS(this.onReportHander, true); // Culmilative Layout Shifts
+        getFID(this.onReportHander); // First Input Delay
+        getLCP(this.onReportHander, true); // Largest Contentful Paint
+        getTTFB(this.onReportHander); // Time To First Byte
+        getFCP(this.onReportHander); // First Contentful Paint
     }
 
     perfServer:string;
@@ -22,11 +51,6 @@ class Performance extends Base {
         if (!this.compareVersion()) {
             // 开始发送性能报告，延迟执行，保证数据尽量准确
             window.addEventListener('load', () => {
-                getCLS(this.onReportHander, true);
-                getFID(this.onReportHander);
-                getLCP(this.onReportHander, true);
-                getTTFB(this.onReportHander);
-                getFCP(this.onReportHander);
                 setTimeout(() => {
                     const data = this.calculater<globalThis.Performance>(window.performance.toJSON().timing);
                     this.onReportHander(data, this.perfServer);

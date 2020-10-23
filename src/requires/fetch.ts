@@ -34,7 +34,12 @@ const _get = <T>(url:string, params: T):void => {
 const _createSendMethod = () => {
     if (window.navigator.sendBeacon) { // 优先尝试新版本浏览器特性
         return <T>(url:string, params:T) => {
-            window.navigator.sendBeacon(url, JSON.stringify(params));
+            window.navigator.sendBeacon(url, JSON.stringify(params, (key, value) => {
+                if (key === 'element' && value !== null) {
+                    return value.className;
+                }
+                return value;
+            }));
         };
     } if (window.fetch) { // 正常版本的请求发送 形参统一
         return <T>(url:string, params:T) => {
