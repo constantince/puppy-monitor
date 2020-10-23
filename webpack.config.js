@@ -54,33 +54,34 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        
-        // new FileZiperAndUploader([
-        //     {
-        //         url: 'http://localhost:8181/upload',
-        //         token: 'auth7yttx8nh0',
-        //         zipName: 'puppy-js.zip',
-        //         target: /\.min\.js$/
-        //     },
-        //     {
-        //         url: 'http://localhost:8181/upload',
-        //         token: 'auth7yttx8nh0',
-        //         zipName: 'puppy-map.zip',
-        //         target: /\.js\.map$/
-        //     },
-        //     {
-        //         url: 'http://localhost:8181/upload',
-        //         token: 'auth7yttx8nh0',
-        //         zipName: 'all1.zip',
-        //         target: 'all'
-        //     },
-        //     {
-        //         url: 'http://localhost:8181/upload',
-        //         token: 'auth7yttx8nh0',
-        //         zipName: 'all2.zip',
-        //         target: 'all'
-        //     }
-        // ])
+        /*
+        new FileZiperAndUploader([
+            {
+                url: 'http://localhost:8181/upload',
+                token: 'auth7yttx8nh0',
+                zipName: 'puppy-js.zip',
+                target: /\.min\.js$/
+            },
+            {
+                url: 'http://localhost:8181/upload',
+                token: 'auth7yttx8nh0',
+                zipName: 'puppy-map.zip',
+                target: /\.js\.map$/
+            },
+            {
+                url: 'http://localhost:8181/upload',
+                token: 'auth7yttx8nh0',
+                zipName: 'all1.zip',
+                target: 'all'
+            },
+            {
+                url: 'http://localhost:8181/upload',
+                token: 'auth7yttx8nh0',
+                zipName: 'all2.zip',
+                target: 'all'
+            }
+        ])
+        */
     ],
     devtool: isPro ? 'none' : 'source-map',
     watchOptions:{
