@@ -1,5 +1,7 @@
 declare namespace ErrorMonitorSpace {
 
+    export type ErrorMessageInfo= Client & Bussiness & System;
+
     export interface Bussiness {
         ln: string | number,
         cn: string | number,
@@ -33,6 +35,10 @@ declare namespace ErrorMonitorSpace {
         traceId: string,
         clientId: string,
         version: string
+    }
+
+    export type HandleErrorFn = {
+        (url: string, params: ErrorMessageInfo) : void;
     }
 }
 
