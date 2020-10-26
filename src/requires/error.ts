@@ -6,6 +6,8 @@ const ua:UAParser = new UAParser();
 const result : IUAParser.IResult = ua.getResult();
 // const navigator = window.navigator.geolocation;
 
+// type ErrorTarget = HTMLElement | HTMLScriptElement | HTMLImageElement | HTMLLinkElement;
+
 class ErrorMonitor extends Base {
     constructor() {
         super();
@@ -24,7 +26,7 @@ class ErrorMonitor extends Base {
         fy: 'js',
     }
 
-    // base: Bussiness
+    base: Puppies.Client
 
     // identify: Identify
 
@@ -64,7 +66,7 @@ class ErrorMonitor extends Base {
             const url = stacks[0];
             const fy = 'JAVASCRIPT';
             this.bus = {
-                ln, cn, msg, url, fy,
+                ln, cn, msg, url, fy
             };
         } else if (e.type === 'error') { // Resource loading Error
             const node = <HTMLElement>e.target;
@@ -106,7 +108,7 @@ class ErrorMonitor extends Base {
     }
 
     sendMessage = (): void => {
-        const urlParams = {
+        const urlParams: Puppies.ErrorMessageInfo = {
             ...this.bus, ...this.sys, ...this.base,
         };
         this.fetch(this.errorServer, urlParams);

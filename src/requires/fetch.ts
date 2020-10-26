@@ -1,3 +1,4 @@
+import ErrorMonitorSpace from "../types/errorspace";
 let img: HTMLImageElement;
 
 // 拼接get参数
@@ -20,8 +21,10 @@ const _createDomEl = (src: string): void => {
     document.body.appendChild(img);
 };
 
+type errors = ErrorMonitorSpace.HandleErrorFn;
+
 // 发送请求
-const _get = <T>(url:string, params: T):void => {
+const _get: errors = (url, params) => {
     const addr = `${url}?${handleErrorInfo(params)}`;
     if (img) {
         img.src = addr;
@@ -31,9 +34,9 @@ const _get = <T>(url:string, params: T):void => {
 };
 
 // 找到当前浏览器支持的请求方式
-const _createSendMethod = () => {
+const _createSendMethod = (): errors => {
     if (window.navigator.sendBeacon) { // 优先尝试新版本浏览器特性
-        return <T>(url:string, params:T) => {
+        const sendBeaconFn: errors = (url, params) => {
             window.navigator.sendBeacon(url, JSON.stringify(params, (key, value) => {
                 if (key === 'element' && value !== null) {
                     return value.className;
@@ -41,10 +44,12 @@ const _createSendMethod = () => {
                 return value;
             }));
         };
+        return sendBeaconFn;
     } if (window.fetch) { // 正常版本的请求发送 形参统一
-        return <T>(url:string, params:T) => {
+        const fetchFn: errors = (url, params) => {
             window.fetch(url, { body: JSON.stringify(params), method: 'POST', keepalive: true });
         };
+        return fetchFn;
     } // 旧浏览器的兼容
     return _get;
 

@@ -46,7 +46,7 @@ class Base {
     }
 
     // 获取js脚本的版本：即当前业务版本号
-    getLatestVersion = () => {
+    getLatestVersion = (): string | null => {
         const entries = window.performance.getEntries();
         const result = entries.find((perf) => /puppy-monitor/.test(perf.name));
         if (result) {
