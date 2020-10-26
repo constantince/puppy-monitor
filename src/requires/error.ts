@@ -6,6 +6,8 @@ const ua:UAParser = new UAParser();
 const result : IUAParser.IResult = ua.getResult();
 // const navigator = window.navigator.geolocation;
 
+// type ErrorTarget = HTMLElement | HTMLScriptElement | HTMLImageElement | HTMLLinkElement;
+
 class ErrorMonitor extends Base {
     constructor() {
         super();

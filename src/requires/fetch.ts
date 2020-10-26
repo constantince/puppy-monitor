@@ -34,7 +34,7 @@ const _get: errors = (url, params) => {
 };
 
 // 找到当前浏览器支持的请求方式
-const _createSendMethod = () => {
+const _createSendMethod = (): errors => {
     if (window.navigator.sendBeacon) { // 优先尝试新版本浏览器特性
         const sendBeaconFn: errors = (url, params) => {
             window.navigator.sendBeacon(url, JSON.stringify(params, (key, value) => {

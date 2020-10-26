@@ -1,6 +1,6 @@
 declare namespace ErrorMonitorSpace {
 
-    export type ErrorMessageInfo= Client & Bussiness & System;
+    export type ErrorMessageInfo = Client & Bussiness & System;
 
     export interface Bussiness {
         ln: string | number,
