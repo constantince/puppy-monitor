@@ -1,5 +1,5 @@
 import {
-    getCLS, getFID, getLCP, getTTFB, getFCP
+    getCLS, getFID, getLCP, getTTFB, getFCP,
 } from 'web-vitals';
 import Puppies from '../types/errorspace';
 import Base from './base';

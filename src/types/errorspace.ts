@@ -1,34 +1,21 @@
 declare namespace ErrorMonitorSpace {
-
-    export type ErrorMessageInfo = Client & Bussiness & System;
-
-    export interface Bussiness {
-        ln: string | number,
-        cn: string | number,
-        msg: string,
-        url: string,
-        fy: string
+   type BussinessEum = 'ln' | 'cn' | 'msg' | 'url' | 'fy';
+   type SystemEum = 'en' | 'os' | 'pf' | 'de';
+   type SystemEnmNot = 'loc' | 'nw';
+   type PerfEum = 'ttfb' | 'ftd' | 'fid' | 'fcp' | 'lcp' | 'cls' | 'con' | 'req' | 'dom';
+   type Metrics = string | number;
+   export type Bussiness = {
+        [K in BussinessEum]: Metrics
     }
 
-    export interface System {
-        en?: string
-        os?: string,
-        pf?: string,
-        de?: string,
-        loc: string,
-        nw: string
+    export type System = {
+        [K in SystemEum]?: Metrics 
+    } & {
+        [U in SystemEnmNot]: Metrics
     }
 
-    export interface Perf {
-        ttfb: number,
-        ftd: number,
-        fid: number,
-        fcp: number,
-        lcp: number,
-        cls: number,
-        con: number,
-        req: number,
-        dom: number
+    export type Perf = {
+        [K in PerfEum]: Metrics
     }
 
     export interface Client {
@@ -40,6 +27,8 @@ declare namespace ErrorMonitorSpace {
     export type HandleErrorFn = {
         (url: string, params: ErrorMessageInfo) : void;
     }
+
+    export type ErrorMessageInfo = Client & Bussiness & System;
 }
 
 export default ErrorMonitorSpace;

@@ -1,4 +1,5 @@
-import ErrorMonitorSpace from "../types/errorspace";
+import ErrorMonitorSpace from '../types/errorspace';
+
 let img: HTMLImageElement;
 
 // 拼接get参数

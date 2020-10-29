@@ -2,8 +2,7 @@
 const Terser =  require('terser-webpack-plugin');
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const FileZiperAndUploader = require('file-ziper-and-uploader');
-
+const { FileZiperAndUploader } = require('file-ziper-and-uploader');
 const isPro = process.env.NODE_ENV === 'production';
 module.exports = {
     mode: 'none',//todo
@@ -54,7 +53,7 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        /*
+       
         new FileZiperAndUploader([
             {
                 url: 'http://localhost:8181/upload',
@@ -81,7 +80,7 @@ module.exports = {
                 target: 'all'
             }
         ])
-        */
+        
     ],
     devtool: isPro ? 'none' : 'source-map',
     watchOptions:{

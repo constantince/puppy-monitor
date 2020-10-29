@@ -66,7 +66,7 @@ class ErrorMonitor extends Base {
             const url = stacks[0];
             const fy = 'JAVASCRIPT';
             this.bus = {
-                ln, cn, msg, url, fy
+                ln, cn, msg, url, fy,
             };
         } else if (e.type === 'error') { // Resource loading Error
             const node = <HTMLElement>e.target;

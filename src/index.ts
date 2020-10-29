@@ -1,6 +1,6 @@
 import ErrorMonitor from './requires/error';
 import Performance from './requires/performance';
-
+import ErrorMonitorSpace from './types/errorspace';
 class PuppyMonitor {
     constructor() {
         console.log('wowowowo....');
