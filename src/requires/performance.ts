@@ -1,7 +1,7 @@
 import {
     getCLS, getFID, getLCP, getTTFB, getFCP,
 } from 'web-vitals';
-import Puppies from '../types/errorspace';
+import Puppies from '../types/monitorspace';
 import Base from './base';
 
 const longtaskObserver: PerformanceObserver = new PerformanceObserver((list) => {
@@ -34,12 +34,12 @@ class Performance extends Base {
         this.metricsServer = `${this.serverUrl}metrics`;
         this.perfServer = `${this.serverUrl}perf`;
         this.init();
-        getCLS(this.onReportHander, true); // Culmilative Layout Shifts
-        getFID(this.onReportHander); // First Input Delay
-        getLCP(this.onReportHander, true); // Largest Contentful Paint
-        getTTFB(this.onReportHander); // Time To First Byte
-        getFCP(this.onReportHander); // First Contentful Paint
-    }
+    //     getCLS(this.onReportHander, true); // Culmilative Layout Shifts
+    //     getFID(this.onReportHander); // First Input Delay
+    //     getLCP(this.onReportHander, true); // Largest Contentful Paint
+    //     getTTFB(this.onReportHander); // Time To First Byte
+    //     getFCP(this.onReportHander); // First Contentful Paint
+     }
 
     perfServer:string;
 
@@ -52,15 +52,15 @@ class Performance extends Base {
             // 开始发送性能报告，延迟执行，保证数据尽量准确
             window.addEventListener('load', () => {
                 setTimeout(() => {
-                    const data = this.calculater<globalThis.Performance>(window.performance.toJSON().timing);
+                    const data = this.calculater<Puppies.PerformanceStatus>(window.performance.toJSON().timing);
                     this.onReportHander(data, this.perfServer);
                 }, 1000);
             }, true);
         }
     }
 
-    calculater = <T>(t: any): T => {
-        const times:any = {};
+    calculater = <T>(t: PerformanceTiming): T => {
+        let times: Puppies.PerformanceStatus;
         // 【重要】页面加载完成的时间
         // 【原因】这几乎代表了用户等待页面可用的时间
         times.loadPage = t.loadEventEnd - t.navigationStart;
@@ -116,7 +116,7 @@ class Performance extends Base {
 
     bus: Puppies.Perf;
 
-    onReportHander = (body, url: string = this.metricsServer): void => {
+    onReportHander = (body: Puppies.ConbineErrorPerf, url: string = this.metricsServer): void => {
         const data = Object.assign(body, this.base);
         // console.log('body content is:', data);
         this.fetch(url, data);

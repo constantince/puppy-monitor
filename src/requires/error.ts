@@ -1,9 +1,9 @@
 import { UAParser } from 'ua-parser-js';
-import Puppies from '../types/errorspace';
+import Puppies from '../types/monitorspace';
 import Base from './base';
 
-const ua:UAParser = new UAParser();
-const result : IUAParser.IResult = ua.getResult();
+const ua = new UAParser();
+const result = ua.getResult();
 // const navigator = window.navigator.geolocation;
 
 // type ErrorTarget = HTMLElement | HTMLScriptElement | HTMLImageElement | HTMLLinkElement;
@@ -69,39 +69,16 @@ class ErrorMonitor extends Base {
                 ln, cn, msg, url, fy,
             };
         } else if (e.type === 'error') { // Resource loading Error
-            const node = <HTMLElement>e.target;
+            const node = <Puppies.ErrorNetElement>e.target;
             const fy = node.nodeName;
             const ln = 0;
             const cn = 0;
             const msg = 'static resource load error';
-            let url: string;
-            if (node) {
-                switch (fy) {
-                case 'SCRIPT': {
-                    const script = <HTMLScriptElement>node;
-                    url = script.src;
-                    break;
-                }
-                case 'IMG':
-                    if (node.className !== 'syt.error.img') {
-                        const img = <HTMLImageElement>node;
-                        url = img.src;
-                    }
-                    break;
-
-                case 'LINK': {
-                    const css = <HTMLLinkElement>node;
-                    url = css.href;
-                    break;
-                }
-                default:
-
-                    break;
-                }
-                this.bus = {
-                    msg, url, fy, ln, cn,
-                };
-            }
+            const url = node.src || node.link;
+           
+            this.bus = {
+                msg, url, fy, ln, cn,
+            };
         }
 
         this.sendMessage();

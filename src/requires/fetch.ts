@@ -1,4 +1,4 @@
-import ErrorMonitorSpace from '../types/errorspace';
+import ErrorMonitorSpace from '../types/monitorspace';
 
 let img: HTMLImageElement;
 

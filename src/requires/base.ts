@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import Communication from './fetch';
 import config from '../../config/config.json';
-import Puppies from '../types/errorspace';
+import Puppies from '../types/monitorspace';
 
 const serverUrl: string = config.remoteUrl;
 const CLIENT_KEY = 'puppy.client.id';
@@ -21,7 +21,18 @@ class Base {
         };
     }
 
-    _createRandom = (): string => Math.random().toString().replace(/^0\./, '')
+    _createRandom = (n:number = 15): string => {
+        if(n > 25) return '0';
+        const conbineArr = '0123456789'.split('').concat('abcdefghijklmnopqrstuvwxyzg'.split(''));
+        let result = '';
+        let i = n;
+        while(i-- >= 0 ) {
+            const random = Math.ceil(Math.random() * 36);
+            result += conbineArr[random -1];
+        }
+        
+        return result;
+    }
 
     // 创建用户唯一标识
     _createClientId = (): string => {
