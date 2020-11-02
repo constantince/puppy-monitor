@@ -37,7 +37,7 @@ namespace MonitorSpace {
 
     export type ErrorMessageInfo = Client | Bussiness | System;
 
-    export type ConbineErrorPerf = ErrorMessageInfo | Perf | PerfmanceStatus;
+    export type ConbineErrorPerf = ErrorMessageInfo | Perf | PerformanceStatus;
 
     export type ErrorNetElement = HTMLImageElement & HTMLScriptElement & {
         link: string

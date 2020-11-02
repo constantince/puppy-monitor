@@ -52,14 +52,14 @@ class Performance extends Base {
             // 开始发送性能报告，延迟执行，保证数据尽量准确
             window.addEventListener('load', () => {
                 setTimeout(() => {
-                    const data = this.calculater<Puppies.PerformanceStatus>(window.performance.toJSON().timing);
+                    const data = this.calculater(window.performance.toJSON().timing);
                     this.onReportHander(data, this.perfServer);
                 }, 1000);
             }, true);
         }
     }
 
-    calculater = <T>(t: PerformanceTiming): T => {
+    calculater = (t: PerformanceTiming): Puppies.PerformanceStatus => {
         let times: Puppies.PerformanceStatus;
         // 【重要】页面加载完成的时间
         // 【原因】这几乎代表了用户等待页面可用的时间
