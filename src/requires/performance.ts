@@ -1,39 +1,49 @@
-import {
-    getCLS, getFID, getLCP, getTTFB, getFCP,
-} from 'web-vitals';
+import Metrics from 'web-performance-metrics';
 import Puppies from '../types/monitorspace';
 import Base from './base';
 
-const longtaskObserver: PerformanceObserver = new PerformanceObserver((list) => {
-    list.getEntries().forEach((item) => {
-        console.log('list entry:', item.toJSON());
-    });
-    // console.log('list entry:', list.getEntries());
-});
+// const longtaskObserver: PerformanceObserver = new PerformanceObserver((list) => {
+//     list.getEntries().forEach((item) => {
+//         console.log('list entry:', item.toJSON());
+//     });
+//     // console.log('list entry:', list.getEntries());
+// });
 
-const paintObserver: PerformanceObserver = new PerformanceObserver((list) => {
-    list.getEntries().forEach((item) => {
-        console.log('list entry:', item.toJSON());
-    });
-    // console.log('list entry:', list.getEntries());
-});
+// const paintObserver: PerformanceObserver = new PerformanceObserver((list) => {
+//     list.getEntries().forEach((item) => {
+//         console.log('list entry:', item.toJSON());
+//     });
+//     // console.log('list entry:', list.getEntries());
+// });
 
-const ttfbObserver: PerformanceObserver = new PerformanceObserver((list) => {
-    list.getEntries().forEach((item) => {
-        console.log('list entry:', item.toJSON());
-    });
-    // console.log('list entry:', list.getEntries());
-});
+// const ttfbObserver: PerformanceObserver = new PerformanceObserver((list) => {
+//     list.getEntries().forEach((item) => {
+//         console.log('list entry:', item.toJSON());
+//     });
+//     // console.log('list entry:', list.getEntries());
+// });
 
-longtaskObserver.observe({ entryTypes: ['longtask'] });
-paintObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-ttfbObserver.observe({ entryTypes: ['resource'] });
+// longtaskObserver.observe({ entryTypes: ['longtask'] });
+// paintObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+// ttfbObserver.observe({ entryTypes: ['resource'] });
 class Performance extends Base {
     constructor() {
         super();
         this.metricsServer = `${this.serverUrl}metrics`;
         this.perfServer = `${this.serverUrl}perf`;
         this.init();
+        Metrics.FCP((arg) => {
+            console.log('FCP......',arg);
+        });
+        Metrics.TTFB(arg => {
+            console.log('ttfb', arg)
+        })
+        Metrics.FP(arg => {
+            console.log('FP', arg);
+        })
+        Metrics.LCP(arg => {
+            console.log('LCP......',arg);
+        })
     //     getCLS(this.onReportHander, true); // Culmilative Layout Shifts
     //     getFID(this.onReportHander); // First Input Delay
     //     getLCP(this.onReportHander, true); // Largest Contentful Paint
