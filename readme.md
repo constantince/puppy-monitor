@@ -1,2 +1,2 @@
-### puppy-monitor
+### puppy-monitor or syt-monitor
 monitor javascript
