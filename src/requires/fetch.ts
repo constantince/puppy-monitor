@@ -52,6 +52,8 @@ const _createSendMethod = (): errors => {
         };
         return fetchFn;
     } // 旧浏览器的兼容
+
+    
     return _get;
 
     /*
