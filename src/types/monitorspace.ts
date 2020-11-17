@@ -1,6 +1,6 @@
 namespace MonitorSpace {
    type BussinessEum = 'ln' | 'cn' | 'msg' | 'url' | 'fy';
-   type SystemEum = 'en' | 'os' | 'pf' | 'de';
+   type SystemEum = 'en' | 'os' | 'pf' | 'de' | 'loc' | 'nw';
    type SystemEnmNot = 'loc' | 'nw';
    type PerfEum = 'ttfb' | 'ftd' | 'fid' | 'fcp' | 'lcp' | 'cls' | 'con' | 'req' | 'dom';
    type Metrics = string | number;
@@ -16,7 +16,7 @@ namespace MonitorSpace {
     }
 
     export type System = {
-        readonly [K in SystemEum]?: Metrics 
+        readonly [K in Exclude<SystemEum, SystemEnmNot>]?: Metrics 
     } & {
         readonly [U in SystemEnmNot]: Metrics
     }
