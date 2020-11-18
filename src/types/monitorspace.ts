@@ -1,5 +1,5 @@
 namespace MonitorSpace {
-   type BussinessEum = 'ln' | 'cn' | 'msg' | 'url' | 'fy';
+   type Business = 'ln' | 'cn' | 'msg' | 'url' | 'fy';
    type SystemEum = 'en' | 'os' | 'pf' | 'de' | 'loc' | 'nw';
    type SystemEnmNot = 'loc' | 'nw';
    type PerfEum = 'ttfb' | 'ftd' | 'fid' | 'fcp' | 'lcp' | 'cls' | 'con' | 'req' | 'dom';
@@ -11,9 +11,13 @@ namespace MonitorSpace {
         [K in Metter]: number
    }
 
-   export type Bussiness = {
-        readonly [K in BussinessEum]: Metrics
-    }
+   const isBusiness = function (arg: Business | PerfEum): arg is Business {
+        return arg in isBusiness;
+   }
+
+   export type Bussiness = Partial<{
+        [K in Business]: Metrics
+    }>
 
     export type System = {
         readonly [K in Exclude<SystemEum, SystemEnmNot>]?: Metrics 
@@ -21,9 +25,9 @@ namespace MonitorSpace {
         readonly [U in SystemEnmNot]: Metrics
     }
 
-    export type Perf = {
-        readonly [K in PerfEum]: Metrics
-    }
+    export type Perf = Readonly<{
+        [K in PerfEum]: Metrics
+    }>
 
     export interface Client {
         readonly traceId: string,
